@@ -224,18 +224,52 @@
       letter-spacing: 0.06em;
     }
 
-    /* ═══ PRINT ═══ */
+    /* ═══ PRINT STYLES ═══ */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
     @media print {
-      body { overflow: visible; background: white; }
-      .slide {
-        position: relative !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        page-break-after: always;
-        height: 1080px !important;
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        background: #FFF !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+
+      .slide-counter, .deck > script {
+        display: none !important;
+      }
+
+      .deck {
+        width: auto;
+        height: auto;
         transform: none !important;
       }
-      .slide-counter { display: none; }
+
+      .slide {
+        display: block !important;
+        position: relative !important;
+        opacity: 1 !important;
+        page-break-after: always !important;
+        transform: none !important;
+        overflow: hidden !important;
+        
+        /* A4 landscape is 297mm x 210mm. Use this viewport to scale the 1920x1080 content */
+        width: 29.7cm;
+        height: 21cm;
+      }
+      
+      /* Target the first child div inside the slide to scale the content */
+      .slide > div {
+        transform: scale(0.58); /* Scale content down to fit */
+        transform-origin: top left;
+        width: 165.5% !important; /* Counteract the scale to fill the width */
+        height: 165.5% !important; /* Counteract the scale to fill the height */
+      }
     }
   </style>
 </head>

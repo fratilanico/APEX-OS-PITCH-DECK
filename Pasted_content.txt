@@ -1,0 +1,19 @@
+
+The @media print block overrides slides to position: relative but several slides use position: absolute on children (slides 5, 7, 8). Without explicit height: 1080px in print mode, absolutely-positioned children may overflow or clip. Add height: 1080px to the .slide print rule.
+
+Select all
+
+
+
+why is it pitch black? is this the route we want to take. - is this on purpose? just want to try to understand i am just trying to understand where is the branding - or if this is on purpose - The screenshots are placeholders that we have to replace based on our actual product and MVP
+
+14:24
+
+
+
+Verdent
+
+
+Thought for 1s
+Let me capture what you're seeing right now and address your questions.
+

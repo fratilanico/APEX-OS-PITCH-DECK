@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX OS — Investor Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════════ */
+    /* DESIGN SYSTEM — VentureLab Aesthetic + V4 Content Fixes    */
+    /* ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg-primary: #0D1520;
+      --bg-card: #131D2B;
+      --bg-card-border: rgba(255,255,255,0.08);
+      --bg-callout: #162030;
+      --text-primary: #FFFFFF;
+      --text-secondary: #C0C8D4;
+      --text-muted: #6B7A8D;
+      --accent: #4A9EFF;
+      --accent-teal: #4ECDC4;
+      --accent-green: #4AFFA0;
+      --accent-red: #FF6B6B;
+      --accent-yellow: #F0C040;
+      --gradient-bar: linear-gradient(90deg, #4ECDC4 0%, #4A9EFF 50%, #7B68EE 100%);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #000;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══ SLIDE ENGINE ═══ */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1920px;
+      height: 1080px;
+      background: var(--bg-primary);
+      padding: 80px 120px;
+      transform-origin: top left;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Top gradient bar */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient-bar);
+    }
+
+    /* Footer */
+    .slide-footer {
+      position: absolute;
+      bottom: 28px;
+      left: 120px;
+      right: 120px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══ TYPOGRAPHY ═══ */
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-teal);
+      display: inline-block;
+    }
+
+    .headline {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .headline-accent {
+      color: var(--accent-teal);
+    }
+
+    .headline-xl {
+      font-size: 96px;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+    }
+
+    .body-text {
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    /* ═══ CARDS ═══ */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ═══ STAT BOXES ═══ */
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    /* ═══ CALLOUT BOX ═══ */
+    .callout {
+      background: var(--bg-callout);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 14px;
+      padding: 20px 32px;
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+
+    .callout-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-yellow);
+      white-space: nowrap;
+    }
+
+    .callout-text {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ═══ TABLE ═══ */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .data-table td {
+      font-size: 16px;
+      color: var(--text-secondary);
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .data-table .highlight-col {
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    /* ═══ SLIDE COUNTER ═══ */
+    .slide-counter {
+      position: fixed;
+      bottom: 28px;
+      right: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      z-index: 100;
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══ PRINT ═══ */
+    @media print {
+      body { overflow: visible; background: white; }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        page-break-after: always;
+        height: 1080px !important;
+        transform: none !important;
+      }
+      .slide-counter { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 01 — TITLE                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide active" id="slide-01">
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 100%; text-align: left;">
+      <div style="margin-bottom: 12px;">
+        <img src="assets/apex-logo.png" alt="APEX OS" style="height: 48px; opacity: 0.9;">
+      </div>
+      <h1 style="font-size: 80px; font-weight: 800; color: var(--text-primary); line-height: 1.05; letter-spacing: -0.03em; margin-top: 40px;">
+        APEX OS
+      </h1>
+      <p style="font-size: 24px; font-weight: 400; color: var(--text-secondary); margin-top: 20px; max-width: 700px; line-height: 1.5;">
+        We manufacture proprietary deal flow.<br>
+        We don't compete for deals. We create them.
+      </p>
+      <p style="font-size: 17px; color: var(--text-muted); margin-top: 40px;">
+        Pre-Beta Investment Round &nbsp;|&nbsp; $200,000 &nbsp;|&nbsp; February 2026
+      </p>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 80px; opacity: 0.6;">
+        Confidential &nbsp;|&nbsp; Prepared for Angel Investors &amp; Early-Stage VCs
+      </p>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>1 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 02 — THE PROBLEM                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-02">
+    <div style="padding-top: 12px;">
+      <p class="section-label">THE PROBLEM</p>
+      <h2 class="headline" style="margin-top: 24px;">Venture Capital is Broken</h2>
+      <p class="body-text" style="margin-top: 20px; max-width: 900px;">
+        The VC model has a fundamental structural flaw: deal sourcing is expensive, subjective, and inefficient. Firms spend millions on sourcing, rely on warm introductions, and still pick wrong the vast majority of the time. Meanwhile, the best founders are invisible because they cannot afford to be seen.
+      </p>
+
+      <div style="display: flex; gap: 32px; margin-top: 48px;">
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-red);">92%</p>
+          <p class="stat-label">Startup Failure Rate</p>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-red);">$50K+</p>
+          <p class="stat-label">Avg. VC Deal Sourcing Cost</p>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-red);">90%</p>
+          <p class="stat-label">VC Investments That Fail</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 40px;">
+        <span class="callout-label">The Opportunity:</span>
+        <span class="callout-text">What if you could observe a founder's actual capabilities before investing? What if deal flow was not sourced, but manufactured? That is what APEX OS does.</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>2 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 03 — THE BUSINESS                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-03">
+    <div style="padding-top: 12px;">
+      <p class="section-label">THE BUSINESS</p>
+      <h2 class="headline" style="margin-top: 24px;">A SaaS Platform That Prints<br><span class="headline-accent">Revenue and Deal Flow.</span></h2>
+      <p class="body-text" style="margin-top: 20px; max-width: 900px;">
+        APEX OS is a subscription platform where builders learn AI-native development. Its true purpose is twofold: it generates high-margin recurring revenue <strong style="color: var(--text-primary);">and</strong> it systematically identifies the top 1% of talent for our Fund.
+      </p>
+
+      <div style="display: flex; gap: 32px; margin-top: 36px;">
+        <div class="card" style="flex: 1;">
+          <p class="card-label" style="color: var(--accent-teal);">COMPONENT 1 &nbsp;|&nbsp; SAAS REVENUE ENGINE</p>
+          <p style="font-size: 28px; font-weight: 700; color: var(--text-primary); margin-top: 4px;">The Foundry</p>
+          <p style="font-size: 16px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">
+            A high-margin subscription platform that attracts thousands of aspiring AI builders. It is a <strong style="color: var(--text-primary);">sophisticated filtering mechanism</strong> that surfaces the top 1% of talent and ideas while generating recurring SaaS revenue at 85% gross margins.
+          </p>
+        </div>
+        <div class="card" style="flex: 1;">
+          <p class="card-label" style="color: var(--accent-teal);">COMPONENT 2 &nbsp;|&nbsp; VENTURE CAPITAL ENGINE</p>
+          <p style="font-size: 28px; font-weight: 700; color: var(--text-primary); margin-top: 4px;">The Fund</p>
+          <p style="font-size: 16px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">
+            A 30-day intensive accelerator that invests in the elite companies born from our Foundry. 15% equity stake. <strong style="color: var(--text-primary);">Zero deal sourcing cost.</strong> We have already observed and measured every founder's capabilities before we invest a single dollar.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 32px;">
+        <span class="callout-label">In one sentence:</span>
+        <span class="callout-text">We are a SaaS platform that has solved its own deal flow problem.</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>3 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 04 — UNFAIR ADVANTAGE / PIPELINE                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-04">
+    <div style="padding-top: 12px;">
+      <p class="section-label">OUR UNFAIR ADVANTAGE</p>
+      <h2 class="headline" style="margin-top: 24px;">32,000 InfoAcademy Users.<br><span class="headline-accent">The Raw Material for Our Lab.</span></h2>
+      <p class="body-text" style="margin-top: 20px; max-width: 700px;">
+        Through InfoAcademy, we have access to 32,000 paying users who have already invested in their technical education. This is the raw material for our Venture Lab: a captive pipeline of aspiring builders that we can systematically filter, cultivate, and invest in.
+      </p>
+
+      <div style="display: flex; gap: 40px; margin-top: 36px;">
+        <!-- Funnel -->
+        <div class="card" style="flex: 1.4;">
+          <p style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">The Venture Lab Pipeline</p>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 17px; font-weight: 600; color: var(--accent-teal);">32,000 enter the Foundry</span>
+              <span style="font-size: 14px; color: var(--text-muted);">Attracted by low-cost, high-value AI education</span>
+            </div>
+            <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 17px; font-weight: 600; color: var(--accent-teal);">~1,600 show high potential</span>
+              <span style="font-size: 14px; color: var(--text-muted);">Identified through proprietary scoring algorithms</span>
+            </div>
+            <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 17px; font-weight: 600; color: var(--accent-teal);">~80 enter the Fund</span>
+              <span style="font-size: 14px; color: var(--text-muted);">Top 5% invited to 30-day intensive accelerator</span>
+            </div>
+            <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 17px; font-weight: 600; color: var(--accent-teal);">~8 receive investment</span>
+              <span style="font-size: 14px; color: var(--text-muted);">Elite companies with proven builders</span>
+            </div>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 16px; opacity: 0.6;">PROJECTED FROM INFOACADEMY DATA &nbsp;|&nbsp; PER ANNUAL COHORT</p>
+        </div>
+
+        <!-- Right stats -->
+        <div style="display: flex; flex-direction: column; gap: 20px; min-width: 280px;">
+          <div class="stat-card">
+            <p class="stat-number" style="color: var(--accent-teal);">$0</p>
+            <p class="stat-label">Deal Sourcing Cost</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number" style="color: var(--accent-teal);">32,000</p>
+            <p class="stat-label">Pre-Qualified Pipeline</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number" style="color: var(--accent-teal);">Day 1</p>
+            <p class="stat-label">Revenue Generation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>4 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 05 — PRODUCT (REAL SCREENSHOTS)                      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-05">
+    <div style="padding-top: 12px;">
+      <p class="section-label">THE PRODUCT</p>
+      <h2 class="headline" style="margin-top: 24px;">Built. Shipping.<br><span class="headline-accent">Not a Mockup.</span></h2>
+      <p class="body-text" style="margin-top: 12px;">
+        APEX OS is live. Terminal-native UI, AI agent orchestration, gamified learning paths. Responsive across all devices.
+      </p>
+
+      <div style="display: flex; gap: 24px; margin-top: 28px; height: 520px; align-items: flex-start;">
+        <!-- Desktop screenshot -->
+        <div style="flex: 1.6; height: 100%; overflow: hidden; border-radius: 8px; border: 1px solid var(--bg-card-border); box-shadow: 0 24px 48px rgba(0,0,0,0.4);">
+          <img src="assets/desktop-terminal-full.png" alt="APEX OS Desktop Terminal" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        </div>
+        <!-- Mobile screenshots -->
+        <div style="display: flex; gap: 16px; height: 100%;">
+          <div style="width: 180px; height: 100%; overflow: hidden; border-radius: 8px; border: 1px solid var(--bg-card-border); box-shadow: 0 24px 48px rgba(0,0,0,0.4);">
+            <img src="assets/mobile-player1.png" alt="APEX OS Mobile - Player Dashboard" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+          </div>
+          <div style="width: 180px; height: 100%; overflow: hidden; border-radius: 8px; border: 1px solid var(--bg-card-border); box-shadow: 0 24px 48px rgba(0,0,0,0.4);">
+            <img src="assets/mobile-onboarding.png" alt="APEX OS Mobile - Onboarding" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 40px; margin-top: 16px;">
+        <span style="font-size: 13px; color: var(--text-muted);">ORCHESTRATOR COCKPIT &nbsp;— Desktop Terminal</span>
+        <span style="font-size: 13px; color: var(--text-muted);">PLAYER DASHBOARD &nbsp;— Mobile</span>
+        <span style="font-size: 13px; color: var(--text-muted);">ONBOARDING FLOW &nbsp;— Mobile</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>5 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 06 — UNIT ECONOMICS                                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-06">
+    <div style="padding-top: 12px;">
+      <p class="section-label">THE FOUNDRY</p>
+      <h2 class="headline" style="margin-top: 24px;">A SaaS Business That Prints<br><span class="headline-accent">Revenue and Deal Flow.</span></h2>
+      <p class="body-text" style="margin-top: 16px; max-width: 900px;">
+        The Foundry is our subscription platform. Its true purpose is twofold: it generates high-margin recurring revenue <strong style="color: var(--text-primary);">and</strong> it systematically identifies the top 1% of talent for our Fund.
+      </p>
+
+      <!-- Pricing tiers -->
+      <div style="display: flex; gap: 24px; margin-top: 28px;">
+        <div class="card" style="flex: 1;">
+          <p class="card-label" style="color: var(--accent-teal);">CODESPRINT</p>
+          <p style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$89/mo</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Emerging Market Entry</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">6-module AI-native curriculum, community access, project templates. Designed for high-volume intake from emerging markets.</p>
+        </div>
+        <div class="card" style="flex: 1;">
+          <p class="card-label" style="color: var(--accent-teal);">BUILDER LAB</p>
+          <p style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$149/mo</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Momentum Tier</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">Everything in CodeSprint plus live workshops, AI agent access, and builder leaderboard. Our core revenue driver.</p>
+        </div>
+        <div class="card" style="flex: 1;">
+          <p class="card-label" style="color: var(--accent-red);">FOUNDER TRACK</p>
+          <p style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$249/mo</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">High-Intent Builders</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">Everything in Builder Lab plus 1:1 mentorship, pitch preparation, and priority access to the Fund. Our talent filter.</p>
+        </div>
+      </div>
+
+      <!-- Bottom stats -->
+      <div style="display: flex; gap: 24px; margin-top: 28px;">
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-teal); font-size: 40px;">85%</p>
+          <p class="stat-label">Gross Margin</p>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-teal); font-size: 40px;">$149</p>
+          <p class="stat-label">Blended ARPU</p>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-teal); font-size: 40px;">$0</p>
+          <p class="stat-label">Direct Acquisition Cost</p>
+          <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Organic from InfoAcademy pipeline</p>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <p class="stat-number" style="color: var(--accent-teal); font-size: 40px;">18:1</p>
+          <p class="stat-label">LTV:CAC</p>
+          <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Fully-loaded (content + ops)</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>6 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 07 — FINANCIAL PROJECTIONS                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-07">
+    <div style="padding-top: 12px;">
+      <p class="section-label">FINANCIAL PROJECTIONS</p>
+      <h2 class="headline" style="margin-top: 24px;">The Numbers.<br><span class="headline-accent">Three Scenarios. All Profitable.</span></h2>
+      <p class="body-text" style="margin-top: 16px;">
+        18-month projections based on $149 blended ARPU and 85% gross margins. All scenarios assume organic acquisition from the existing 32,000-user InfoAcademy pipeline.
+      </p>
+
+      <div class="card" style="margin-top: 32px; padding: 0; overflow: hidden;">
+        <table class="data-table">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.03);">
+              <th style="width: 20%;">Scenario</th>
+              <th>Builders (Mo 18)</th>
+              <th>Monthly Revenue</th>
+              <th>Annual Run Rate</th>
+              <th>Monthly Net</th>
+              <th>Gross Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 600; color: var(--text-muted);">Bear</td>
+              <td>200</td>
+              <td>$29,800</td>
+              <td>$358K</td>
+              <td style="color: var(--text-muted);">+$5K</td>
+              <td>85%</td>
+            </tr>
+            <tr style="background: rgba(74,158,255,0.04);">
+              <td style="font-weight: 600; color: var(--accent);">Base</td>
+              <td>550</td>
+              <td>$82,000</td>
+              <td style="color: var(--accent); font-weight: 600;">$984K</td>
+              <td style="color: var(--accent);">+$48K</td>
+              <td>85%</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600; color: var(--text-muted);">Bull</td>
+              <td>1,000</td>
+              <td>$149,000</td>
+              <td>$1.79M</td>
+              <td style="color: var(--text-secondary);">+$97K</td>
+              <td>85%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; opacity: 0.6;">
+        ARR = Builders × $149 ARPU × 12. Monthly Net = Revenue − Operating Costs ($25K/mo base). All scenarios assume $0 paid acquisition.
+      </p>
+
+      <div class="callout" style="margin-top: 24px;">
+        <span class="callout-label">Key Insight:</span>
+        <span class="callout-text">Base case reaches ~$1M ARR in 18 months. Bull case approaches $1.8M. Both scenarios are Series A ready.</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>7 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 08 — DEFENSIBILITY                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-08">
+    <div style="padding-top: 12px;">
+      <p class="section-label">DEFENSIBILITY</p>
+      <h2 class="headline" style="margin-top: 24px;">Low Entry Barrier =<br><span class="headline-accent">Our Greatest Strategic Weapon</span></h2>
+      <p class="body-text" style="margin-top: 16px; max-width: 900px;">
+        Our low price point is deliberate. It maximises intake volume into our Foundry, which maximises the quality of deal flow into our Fund. The moats that protect us are structural.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
+        <div class="card">
+          <p style="font-size: 18px; font-weight: 700; color: var(--accent-teal);">1. The Distribution Moat</p>
+          <p style="font-size: 15px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5;">32,000 paying users cannot be copied. A competitor must spend $500K-$2M and 18+ months to build an equivalent pipeline. By then, we will have converted ours and moved to Phase 2.</p>
+        </div>
+        <div class="card">
+          <p style="font-size: 18px; font-weight: 700; color: var(--accent-teal);">2. The Data Moat</p>
+          <p style="font-size: 15px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5;">Every builder interaction generates proprietary data on talent quality, project viability, and orchestration patterns. With 1,000+ users, we will have pattern libraries no competitor can replicate.</p>
+        </div>
+        <div class="card">
+          <p style="font-size: 18px; font-weight: 700; color: var(--accent-teal);">3. The Community Moat</p>
+          <p style="font-size: 15px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5;">Communities are the hardest moat to replicate. Our builders form peer networks, accountability groups, and co-founder matches. Switching costs become emotional, not just financial.</p>
+        </div>
+        <div class="card">
+          <p style="font-size: 18px; font-weight: 700; color: var(--accent-teal);">4. The Ecosystem Lock-in</p>
+          <p style="font-size: 15px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5;">Foundry graduates feed the Fund. Fund companies generate B2B licensing revenue. B2B revenue funds Foundry growth. A competitor must replicate all three simultaneously.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 24px;">
+        <span class="callout-label">The Bottom Line:</span>
+        <span class="callout-text">Anyone can build a course. Nobody can replicate 32K users + proprietary data + a living community + a venture pipeline + an 18-month head start. That is our moat.</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>8 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 09 — THE NETWORK                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-09">
+    <div style="padding-top: 12px;">
+      <p class="section-label">THE NETWORK</p>
+      <h2 class="headline" style="margin-top: 24px;">Global Reach.<br><span class="headline-accent">Day One.</span></h2>
+      <p class="body-text" style="margin-top: 16px; max-width: 800px;">
+        APEX OS doesn't just have a product. It has access. Three years of building InfoAcademy opened doors across four continents. These are not LinkedIn connections. These are people who pick up the phone.
+      </p>
+
+      <div style="display: flex; gap: 32px; margin-top: 36px;">
+        <!-- Left: Network categories -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+          <div class="card">
+            <div style="display: flex; gap: 20px; align-items: baseline;">
+              <span style="font-size: 40px; font-weight: 200; color: var(--text-muted); opacity: 0.4; min-width: 40px;">1</span>
+              <div>
+                <p style="font-size: 20px; font-weight: 700; color: var(--text-primary);">Angel Investors &amp; Strategic Advisors</p>
+                <p style="font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5;">Active angels and operators across India, Mauritius, and the UK. People who write cheques and open doors. Not passive advisors — active participants in our deal flow.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display: flex; gap: 20px; align-items: baseline;">
+              <span style="font-size: 40px; font-weight: 200; color: var(--text-muted); opacity: 0.4; min-width: 40px;">2</span>
+              <div>
+                <p style="font-size: 20px; font-weight: 700; color: var(--text-primary);">UK Family Offices</p>
+                <p style="font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5;">Direct relationships with family office principals. Patient capital that understands long-term platform plays. These are follow-on investors for our Fund companies.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display: flex; gap: 20px; align-items: baseline;">
+              <span style="font-size: 40px; font-weight: 200; color: var(--text-muted); opacity: 0.4; min-width: 40px;">3</span>
+              <div>
+                <p style="font-size: 20px; font-weight: 700; color: var(--text-primary);">Emerging Market Access</p>
+                <p style="font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5;">On-the-ground connections in Africa and Asia. Markets where the next generation of builders is coming from — and where our pipeline is strongest.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Geographic reach -->
+        <div style="min-width: 340px; display: flex; flex-direction: column; gap: 16px;">
+          <p style="font-weight: 600; font-size: 12px; color: var(--text-muted); letter-spacing: 0.12em; margin-bottom: 4px;">GEOGRAPHIC REACH</p>
+
+          <div class="card" style="padding: 20px 24px;">
+            <p style="font-size: 24px; font-weight: 700; color: var(--text-primary);">Europe</p>
+            <p style="font-size: 13px; color: var(--accent-teal); margin-top: 4px;">UK &amp; Continental</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Family offices, angel syndicates, VC firms. London, Dublin, Bucharest.</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p style="font-size: 24px; font-weight: 700; color: var(--text-primary);">India</p>
+            <p style="font-size: 13px; color: var(--accent-teal); margin-top: 4px;">Strategic Advisors</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Tech operators and investors in one of the world's fastest-growing startup ecosystems.</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p style="font-size: 24px; font-weight: 700; color: var(--text-primary);">Mauritius &amp; Africa</p>
+            <p style="font-size: 13px; color: var(--accent-teal); margin-top: 4px;">Founder Networks</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Gateway to African tech talent. Strategic advisors with cross-border deal experience.</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p style="font-size: 24px; font-weight: 700; color: var(--text-primary);">Asia</p>
+            <p style="font-size: 13px; color: var(--accent-teal); margin-top: 4px;">Market Expansion</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Connections into Asian markets for future cohort sourcing and co-investment opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>9 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 10 — FOUNDER                                         -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-10">
+    <div style="display: flex; align-items: center; height: 100%; gap: 80px;">
+      <!-- Photo -->
+      <div style="width: 380px; flex-shrink: 0;">
+        <div style="width: 100%; aspect-ratio: 3/4; overflow: hidden; border-radius: 8px; box-shadow: 0 24px 48px rgba(0,0,0,0.4);">
+          <img src="assets/founder-photo.jpg" alt="Nicolae Fratila" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%);">
+        </div>
+      </div>
+      <!-- Bio -->
+      <div style="flex: 1;">
+        <p class="section-label">FOUNDER &amp; CEO</p>
+        <h2 class="headline" style="margin-top: 24px;">Nicolae Fratila</h2>
+        <p class="body-text" style="margin-top: 16px;">Solo founder. Technical architect. Ships first, pitches second.</p>
+
+        <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 20px;">
+          <div class="card" style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-size: 36px; font-weight: 700; color: var(--accent); min-width: 70px; text-align: right;">10d</span>
+            <div>
+              <p style="font-size: 18px; font-weight: 600; color: var(--text-primary);">Built the entire APEX OS platform</p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 3px;">Full-stack: frontend, backend, AI integration, terminal UI, curriculum system</p>
+            </div>
+          </div>
+          <div class="card" style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-size: 36px; font-weight: 700; color: var(--accent); min-width: 70px; text-align: right;">32K</span>
+            <div>
+              <p style="font-size: 18px; font-weight: 600; color: var(--text-primary);">Founded InfoAcademy</p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 3px;">32,000+ paying users. 3 years of organic, profitable growth. Zero outside capital.</p>
+            </div>
+          </div>
+          <div class="card" style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-size: 28px; font-weight: 700; color: var(--accent-teal); min-width: 70px; text-align: right;">ship</span>
+            <div>
+              <p style="font-size: 18px; font-weight: 600; color: var(--text-primary);">Product-first mentality</p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 3px;">Technical founder who builds, not a CEO who manages. Code is the pitch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>10 / 11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 11 — THE ASK                                         -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-11">
+    <div style="display: flex; justify-content: space-between; height: 100%;">
+      <!-- Left column -->
+      <div style="padding-top: 12px; max-width: 55%; display: flex; flex-direction: column;">
+        <p class="section-label">THE ASK</p>
+        <p class="headline-xl" style="margin-top: 24px;">$200,000</p>
+        <p class="body-text" style="margin-top: 12px; font-size: 22px;">Pre-beta round. Enough to reach ~$1M ARR in 18 months.</p>
+        <p style="font-size: 17px; color: var(--text-muted); margin-top: 8px;">Instrument: SAFE &nbsp;&middot;&nbsp; Valuation Cap: $4M</p>
+
+        <div style="margin-top: 40px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 16px;">USE OF FUNDS</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;">
+              <span style="font-size: 16px; color: var(--text-primary); font-weight: 500;">Product &amp; Engineering</span>
+              <span style="font-size: 20px; font-weight: 700; color: var(--accent);">40%</span>
+            </div>
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;">
+              <span style="font-size: 16px; color: var(--text-primary); font-weight: 500;">Content &amp; Curriculum</span>
+              <span style="font-size: 20px; font-weight: 700; color: var(--accent);">25%</span>
+            </div>
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;">
+              <span style="font-size: 16px; color: var(--text-primary); font-weight: 500;">Community &amp; Growth</span>
+              <span style="font-size: 20px; font-weight: 700; color: var(--accent);">20%</span>
+            </div>
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;">
+              <span style="font-size: 16px; color: var(--text-primary); font-weight: 500;">Operations &amp; Legal</span>
+              <span style="font-size: 20px; font-weight: 700; color: var(--accent);">15%</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex: 1;"></div>
+        <p style="font-size: 22px; font-weight: 600; color: var(--accent-green); padding-bottom: 8px;">
+          Product works. 32,000 users. Fund the growth.
+        </p>
+      </div>
+
+      <!-- Right column -->
+      <div style="padding-top: 12px; min-width: 380px;">
+        <p style="font-size: 14px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 20px;">WHAT $200K ENABLES</p>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="card" style="padding: 20px 24px;">
+            <p class="stat-number" style="font-size: 36px; color: var(--accent-teal); text-align: left;">550+</p>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Active builders on platform (Month 18)</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p class="stat-number" style="font-size: 36px; color: var(--accent-teal); text-align: left;">~$1M</p>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Annual recurring revenue run rate</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p class="stat-number" style="font-size: 36px; color: var(--accent-teal); text-align: left;">8</p>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Fund investments (15% equity each)</p>
+          </div>
+          <div class="card" style="padding: 20px 24px;">
+            <p class="stat-number" style="font-size: 36px; color: var(--accent-teal); text-align: left;">Series A</p>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Ready within 18 months</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px; text-align: left;">
+          <p style="font-size: 16px; color: var(--text-secondary);">Nicolae Fratila</p>
+          <p style="font-size: 16px; color: var(--accent);">fratilanico@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>CONFIDENTIAL &nbsp;|&nbsp; APEX OS &nbsp;|&nbsp; February 2026</span>
+      <span>11 / 11</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Slide counter -->
+<div class="slide-counter" id="counter">1 / 11</div>
+
+<script>
+  // ═══ SLIDE ENGINE ═══
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+  let current = 0;
+
+  function scaleDeck() {
+    const sw = window.innerWidth / 1920;
+    const sh = window.innerHeight / 1080;
+    const s = Math.min(sw, sh);
+    slides.forEach(sl => {
+      sl.style.transform = `scale(${s})`;
+    });
+  }
+
+  function goTo(n) {
+    if (n < 0 || n >= total) return;
+    slides[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      goTo(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      goTo(current - 1);
+    } else if (e.key === 'Home') {
+      goTo(0);
+    } else if (e.key === 'End') {
+      goTo(total - 1);
+    }
+  });
+
+  // Click navigation
+  document.addEventListener('click', e => {
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.5) goTo(current + 1);
+    else goTo(current - 1);
+  });
+
+  // Touch support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) goTo(current + 1);
+      else goTo(current - 1);
+    }
+  });
+
+  // Init
+  window.addEventListener('resize', scaleDeck);
+  scaleDeck();
+</script>
+
+</body>
+</html>

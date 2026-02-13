@@ -1,0 +1,12 @@
+{
+  "name": "apex-os-pitch-deck",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "export": "node export-pdf.js",
+    "preview": "open index.html"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  }
+}

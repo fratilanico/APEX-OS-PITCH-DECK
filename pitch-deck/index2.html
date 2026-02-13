@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX OS — Pitch Deck v2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080D;
+      --text-primary: #E8E8ED;
+      --text-secondary: #A0A0AB;
+      --text-muted: #6B6B76;
+      --accent: #4A9EFF;
+      --accent-cta: #4AFFA0;
+      --surface: #12121A;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .presentation {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      background: var(--bg);
+      padding: 80px 120px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      transform-origin: top left;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .headline {
+      font-weight: 200;
+      font-size: 72px;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+
+    .headline-sm {
+      font-weight: 200;
+      font-size: 48px;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+
+    .headline-xl {
+      font-weight: 200;
+      font-size: 128px;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .body-text {
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .stat-number {
+      font-weight: 300;
+      font-size: 56px;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .caption {
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .accent { color: var(--accent); }
+    .accent-cta { color: var(--accent-cta); }
+
+    .controls {
+      position: fixed;
+      bottom: 24px;
+      right: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slide-counter {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      opacity: 0.6;
+    }
+
+    .nav-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0.3;
+      transition: opacity 0.6s;
+    }
+
+    .nav-hint.hidden { opacity: 0; }
+
+    .thin-rule {
+      width: 64px;
+      height: 1px;
+      background: var(--accent);
+      margin: 24px 0;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    table { border-collapse: collapse; }
+    th, td { font-family: 'Inter', sans-serif; }
+
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      body { overflow: visible; cursor: default; }
+      .controls { display: none; }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        height: 1080px !important;
+        overflow: hidden !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="presentation">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 01 — TITLE                                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide active" id="slide-01">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+      <p style="font-weight: 500; font-size: 13px; color: var(--text-muted); letter-spacing: 0.2em; margin-bottom: 20px;">PITCH DECK &middot; FEBRUARY 2026</p>
+      <h1 class="headline-xl" style="font-size: 140px; margin-bottom: 16px;">APEX OS</h1>
+      <div class="thin-rule" style="margin: 16px auto;"></div>
+      <p style="font-weight: 300; font-size: 28px; color: var(--text-primary); letter-spacing: -0.01em; margin-bottom: 8px;">The Venture Lab</p>
+      <p class="body-text" style="font-size: 22px; max-width: 650px; margin-top: 8px;">A SaaS platform that generates its own deal flow.</p>
+      <div style="margin-top: 56px; display: flex; gap: 48px; align-items: center;">
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 32px; color: var(--text-primary);">$200K</p>
+          <p class="stat-label">Pre-beta round</p>
+        </div>
+        <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.1);"></div>
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 32px; color: var(--text-primary);">$32,000</p>
+          <p class="stat-label">InfoAcademy Users</p>
+        </div>
+        <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.1);"></div>
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 32px; color: var(--text-primary);">$125</p>
+          <p class="stat-label">Blended CAC</p>
+        </div>
+      </div>
+    </div>
+    <p class="caption" style="position: absolute; bottom: 40px; left: 120px; opacity: 0.35;">Confidential &middot; APEX OS Ltd.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 02 — THE PROBLEM                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-02">
+    <div style="display: flex; justify-content: space-between; height: 100%;">
+      <div style="max-width: 52%; padding-top: 32px; display: flex; flex-direction: column;">
+        <p class="section-label">THE PROBLEM</p>
+        <h2 class="headline" style="margin-top: 20px;">Deal flow is broken</h2>
+        <p class="body-text" style="margin-top: 24px; max-width: 520px;">VCs spend more time finding companies than funding them. The entire pipeline depends on warm intros and guesswork.</p>
+        <div class="thin-rule"></div>
+        <p class="body-text" style="font-size: 17px; color: var(--text-muted); max-width: 480px; margin-top: 4px;">The standard VC model: source thousands, meet hundreds, fund a handful. Most of the budget goes to finding deals, not making them work.</p>
+        <div style="flex: 1;"></div>
+        <p class="body-text accent" style="font-size: 24px; font-weight: 300; padding-bottom: 8px;">What if the deals came to you?</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 48px; padding-top: 48px; min-width: 380px;">
+        <div>
+          <p class="stat-number" style="font-size: 72px;">92%</p>
+          <p class="stat-label" style="margin-top: 12px;">of funded startups sourced<br>via personal networks</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 8px;">Source: First Round Capital, 2024</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p class="stat-number" style="font-size: 72px;">$50K+</p>
+          <p class="stat-label" style="margin-top: 12px;">average cost per<br>funded deal</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 8px;">Includes sourcing, diligence, legal</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p class="stat-number" style="font-size: 72px;">90%</p>
+          <p class="stat-label" style="margin-top: 12px;">of venture-backed<br>startups fail anyway</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 03 — THE MODEL                                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-03">
+    <div style="padding-top: 32px;">
+      <p class="section-label">THE MODEL</p>
+      <h2 class="headline" style="margin-top: 20px;">Watch them build. Then bet.</h2>
+      <p class="body-text" style="margin-top: 16px;">One platform. Two revenue engines. Zero guesswork.</p>
+    </div>
+
+    <div style="display: flex; gap: 64px; margin-top: 48px;">
+      <div style="flex: 1;">
+        <p style="font-weight: 500; font-size: 13px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;">Component 1</p>
+        <p style="font-weight: 300; font-size: 32px; color: var(--text-primary); margin-top: 12px;">The Foundry <span style="font-size: 20px; color: var(--text-muted); font-weight: 400;">(SaaS)</span></p>
+        <p class="body-text" style="margin-top: 12px; font-size: 18px;">Subscription platform at $89&ndash;$249/mo. Attracts builders, generates 85% gross margin revenue, and scores talent through real project output.</p>
+        <div style="margin-top: 20px; display: flex; gap: 32px;">
+          <div><p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">$89&ndash;$249</p><p class="stat-label">Monthly pricing</p></div>
+          <div><p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">85%</p><p class="stat-label">Gross margin</p></div>
+        </div>
+      </div>
+      <div style="width: 1px; background: rgba(255,255,255,0.06);"></div>
+      <div style="flex: 1;">
+        <p style="font-weight: 500; font-size: 13px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;">Component 2</p>
+        <p style="font-weight: 300; font-size: 32px; color: var(--text-primary); margin-top: 12px;">The Fund <span style="font-size: 20px; color: var(--text-muted); font-weight: 400;">(VC)</span></p>
+        <p class="body-text" style="margin-top: 12px; font-size: 18px;">30-day accelerator program. Takes 15% equity in founders who have already proven themselves on the platform. Zero deal sourcing cost.</p>
+        <div style="margin-top: 20px; display: flex; gap: 32px;">
+          <div><p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">15%</p><p class="stat-label">Equity stake</p></div>
+          <div><p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">$0</p><p class="stat-label">Sourcing cost</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px;">
+      <p class="caption" style="margin-bottom: 16px; opacity: 0.6;">THE PIPELINE (ANNUAL COHORT)</p>
+      <div style="display: flex; align-items: center;">
+        <div style="flex: 1; text-align: center; padding: 24px 0;">
+          <p style="font-weight: 200; font-size: 64px; color: var(--text-primary);">32,000</p>
+          <p class="stat-label">User Pool</p>
+          <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">via InfoAcademy</p>
+        </div>
+        <div style="flex-shrink: 0; display: flex; align-items: center; padding: 0 8px;">
+          <div style="width: 48px; height: 1px; background: var(--text-muted); opacity: 0.3;"></div>
+          <div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid var(--text-muted); opacity: 0.3;"></div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 24px 0;">
+          <p style="font-weight: 200; font-size: 64px; color: var(--text-primary);">1,600</p>
+          <p class="stat-label">Scored</p>
+          <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">Behavior-analyzed</p>
+        </div>
+        <div style="flex-shrink: 0; display: flex; align-items: center; padding: 0 8px;">
+          <div style="width: 48px; height: 1px; background: var(--text-muted); opacity: 0.3;"></div>
+          <div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid var(--text-muted); opacity: 0.3;"></div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 24px 0;">
+          <p style="font-weight: 200; font-size: 64px; color: var(--text-primary);">80</p>
+          <p class="stat-label">Accelerated</p>
+          <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">30-day program</p>
+        </div>
+        <div style="flex-shrink: 0; display: flex; align-items: center; padding: 0 8px;">
+          <div style="width: 48px; height: 1px; background: var(--text-muted); opacity: 0.3;"></div>
+          <div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid var(--text-muted); opacity: 0.3;"></div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 24px 0;">
+          <p style="font-weight: 200; font-size: 64px; color: var(--text-primary);">8</p>
+          <p class="stat-label" style="color: var(--text-primary);">Funded</p>
+          <p style="font-size: 12px; color: var(--text-muted); opacity: 0.6; margin-top: 4px;">Top 0.025%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 04 — UNFAIR ADVANTAGE                                 -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-04">
+    <div style="display: flex; justify-content: space-between; height: 100%;">
+      <div style="padding-top: 32px; max-width: 58%; display: flex; flex-direction: column;">
+        <p class="section-label">UNFAIR ADVANTAGE</p>
+        <p class="headline-xl" style="margin-top: 20px; font-size: 148px;">32,000</p>
+        <p style="font-weight: 300; font-size: 28px; color: var(--text-secondary); margin-top: 8px;">paying customers through InfoAcademy</p>
+        <div class="thin-rule"></div>
+        <p class="body-text" style="margin-top: 8px; max-width: 540px;">Three years of organic growth. Real people paying real money for real education. This pipeline already exists. Activating it costs nothing.</p>
+        <div style="flex: 1;"></div>
+        <div style="padding-bottom: 8px;">
+          <p style="font-size: 15px; color: var(--text-muted); opacity: 0.6;">Cost for a competitor to replicate this distribution:</p>
+          <p style="font-weight: 300; font-size: 24px; color: var(--text-primary); margin-top: 4px;">$500K&ndash;$2M + 18 months minimum</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 40px; padding-top: 56px; min-width: 340px;">
+        <div>
+          <p class="stat-number accent" style="font-size: 72px;">$125</p>
+          <p class="stat-label" style="margin-top: 12px;">Blended CAC</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 6px;">vs. $650+ industry average</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p class="stat-number" style="font-size: 72px;">32K</p>
+          <p class="stat-label" style="margin-top: 12px;">Existing pipeline</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 6px;">InfoAcademy paying customers</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p class="stat-number" style="font-size: 72px;">Day 1</p>
+          <p class="stat-label" style="margin-top: 12px;">Available immediately</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 6px;">No cold start problem</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p class="stat-number" style="font-size: 72px;">3 yrs</p>
+          <p class="stat-label" style="margin-top: 12px;">Time to build this base</p>
+          <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5; margin-top: 6px;">Cannot be replicated quickly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 05 — THE PRODUCT                                      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-05">
+    <div style="padding-top: 32px; display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <p class="section-label">THE PRODUCT</p>
+        <h2 class="headline" style="margin-top: 20px;">Built. Shipping.</h2>
+        <p class="body-text" style="margin-top: 16px;">Entire platform built in 10 days by one founder. Not a mockup. Not a prototype.</p>
+      </div>
+      <div style="display: flex; gap: 24px; padding-top: 8px;">
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">10</p>
+          <p class="stat-label">Days to build</p>
+        </div>
+        <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.08);"></div>
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">1</p>
+          <p class="stat-label">Developer</p>
+        </div>
+        <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.08);"></div>
+        <div style="text-align: center;">
+          <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">100%</p>
+          <p class="stat-label">Functional</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 28px; position: absolute; bottom: 160px; left: 120px; right: 120px;">
+      <div style="flex: 1;">
+        <div style="width: 100%; height: 340px; background: #1A1A24; border-radius: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04);">
+          <p style="font-size: 14px; color: var(--text-muted); letter-spacing: 0.06em; opacity: 0.4;">SCREENSHOT</p>
+        </div>
+        <p style="font-size: 15px; color: var(--text-primary); margin-top: 14px; font-weight: 400;">Pill Choice System</p>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">5 experience modes. Users choose their path on entry.</p>
+      </div>
+      <div style="flex: 1;">
+        <div style="width: 100%; height: 340px; background: #1A1A24; border-radius: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04);">
+          <p style="font-size: 14px; color: var(--text-muted); letter-spacing: 0.06em; opacity: 0.4;">SCREENSHOT</p>
+        </div>
+        <p style="font-size: 15px; color: var(--text-primary); margin-top: 14px; font-weight: 400;">SpectacularTerminal + Geek Mode</p>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Matrix rain, CRT scanlines, ASCII particles. Fully interactive.</p>
+      </div>
+      <div style="flex: 1;">
+        <div style="width: 100%; height: 340px; background: #1A1A24; border-radius: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04);">
+          <p style="font-size: 14px; color: var(--text-muted); letter-spacing: 0.06em; opacity: 0.4;">SCREENSHOT</p>
+        </div>
+        <p style="font-size: 15px; color: var(--text-primary); margin-top: 14px; font-weight: 400;">Builder Dashboard</p>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Curriculum, progress tracking, AI-powered learning guidance.</p>
+      </div>
+    </div>
+
+    <div style="position: absolute; bottom: 80px; left: 120px; right: 120px; display: flex; gap: 40px;">
+      <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5;">Pill Choice System &mdash; 100% built</p>
+      <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5;">Geek Mode + Terminal &mdash; 100% built</p>
+      <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5;">Python Fundamentals Module 01 &mdash; 100% built</p>
+      <p style="font-size: 13px; color: var(--text-muted); opacity: 0.5;">BrandingBar with geek toggle &mdash; 100% built</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 06 — UNIT ECONOMICS                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-06">
+    <div style="padding-top: 32px;">
+      <p class="section-label">UNIT ECONOMICS</p>
+      <h2 class="headline-sm" style="margin-top: 20px;">The numbers</h2>
+    </div>
+
+    <div style="display: flex; gap: 72px; margin-top: 48px;">
+      <div>
+        <p class="stat-number" style="font-size: 64px;">$149</p>
+        <p class="stat-label" style="margin-top: 12px;">Blended ARPU</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">Weighted across 3 tiers</p>
+      </div>
+      <div>
+        <p class="stat-number" style="font-size: 64px;">$125</p>
+        <p class="stat-label" style="margin-top: 12px;">CAC</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">40% InfoAcademy / 30% Org / 30% Partner</p>
+      </div>
+      <div>
+        <p class="stat-number" style="font-size: 64px;">85%</p>
+        <p class="stat-label" style="margin-top: 12px;">Gross margin</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">SaaS-typical at scale</p>
+      </div>
+      <div>
+        <p class="stat-number" style="font-size: 64px;">18:1</p>
+        <p class="stat-label" style="margin-top: 12px;">LTV : CAC</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 4px;">Top 1% efficiency (Industry avg 3:1)</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; align-items: center; gap: 32px;">
+      <p class="caption" style="opacity: 0.5;">PRICING TIERS</p>
+      <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.06);"></div>
+    </div>
+    <div style="display: flex; gap: 64px; margin-top: 16px;">
+      <div>
+        <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">$89<span style="font-size: 16px; color: var(--text-muted); font-weight: 400;">/mo</span></p>
+        <p class="stat-label">CodeSprint</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 2px;">Self-paced learning</p>
+      </div>
+      <div>
+        <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">$149<span style="font-size: 16px; color: var(--text-muted); font-weight: 400;">/mo</span></p>
+        <p class="stat-label">Builder Lab</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 2px;">Guided projects + community</p>
+      </div>
+      <div>
+        <p style="font-weight: 300; font-size: 28px; color: var(--text-primary);">$249<span style="font-size: 16px; color: var(--text-muted); font-weight: 400;">/mo</span></p>
+        <p class="stat-label">Founder Track</p>
+        <p style="font-size: 12px; color: var(--text-muted); opacity: 0.5; margin-top: 2px;">Mentorship + accelerator path</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; align-items: center; gap: 32px;">
+      <p class="caption" style="opacity: 0.5;">18-MONTH SCENARIOS (SAAS ONLY)</p>
+      <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.06);"></div>
+    </div>
+    <table style="width: 100%; margin-top: 12px; max-width: 1000px;">
+      <thead>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <th style="text-align: left; padding: 14px 0; font-weight: 400; font-size: 13px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; width: 20%;">Scenario</th>
+          <th style="text-align: right; padding: 14px 0; font-weight: 400; font-size: 13px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase;">Builders</th>
+          <th style="text-align: right; padding: 14px 0; font-weight: 400; font-size: 13px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase;">Conv.</th>
+          <th style="text-align: right; padding: 14px 0; font-weight: 400; font-size: 13px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase;">18mo ARR</th>
+          <th style="text-align: right; padding: 14px 0; font-weight: 400; font-size: 13px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase;">Monthly net</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary);">Bear</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">245</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">0.8%</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">$438K</td>
+          <td style="padding: 14px 0; font-size: 18px; color: #FF6B6B; text-align: right;">-$12K</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); font-weight: 500;">Base</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); text-align: right;">840</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); text-align: right;">2.6%</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); text-align: right; font-weight: 500;">$1.5M</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); text-align: right;">+$48K</td>
+        </tr>
+        <tr>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary);">Bull</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">2,800</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">8.8%</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-secondary); text-align: right;">$5.0M</td>
+          <td style="padding: 14px 0; font-size: 18px; color: var(--text-primary); text-align: right;">+$180K</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 12px; color: var(--text-muted); opacity: 0.4; margin-top: 12px;">SaaS revenue only. Fund carry and equity upside excluded from all projections.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 07 — DEFENSIBILITY                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-07">
+    <div style="padding-top: 32px;">
+      <p class="section-label">DEFENSIBILITY</p>
+      <h2 class="headline" style="margin-top: 20px;">Why this can't be copied</h2>
+    </div>
+
+    <div style="margin-top: 56px; display: flex; flex-direction: column; gap: 40px; max-width: 72%;">
+      <div style="display: flex; gap: 28px; align-items: baseline;">
+        <span style="font-weight: 200; font-size: 48px; color: var(--text-muted); opacity: 0.4; min-width: 48px;">1</span>
+        <div>
+          <p style="font-weight: 400; font-size: 24px; color: var(--text-primary);">Distribution</p>
+          <p class="body-text" style="margin-top: 6px;">32,000 paying customers built over 3 years through InfoAcademy. A competitor would need $500K&ndash;$2M and 18+ months to get anywhere close.</p>
+        </div>
+      </div>
+      <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04); margin-left: 76px;"></div>
+      <div style="display: flex; gap: 28px; align-items: baseline;">
+        <span style="font-weight: 200; font-size: 48px; color: var(--text-muted); opacity: 0.4; min-width: 48px;">2</span>
+        <div>
+          <p style="font-weight: 400; font-size: 24px; color: var(--text-primary);">Data</p>
+          <p class="body-text" style="margin-top: 6px;">Every builder&rsquo;s behavior is scored. Every project tracked. This creates a proprietary talent signal that improves with every user.</p>
+        </div>
+      </div>
+      <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04); margin-left: 76px;"></div>
+      <div style="display: flex; gap: 28px; align-items: baseline;">
+        <span style="font-weight: 200; font-size: 48px; color: var(--text-muted); opacity: 0.4; min-width: 48px;">3</span>
+        <div>
+          <p style="font-weight: 400; font-size: 24px; color: var(--text-primary);">Community</p>
+          <p class="body-text" style="margin-top: 6px;">Builders attract builders. The network effect compounds &mdash; each new member makes the platform more valuable for everyone else.</p>
+        </div>
+      </div>
+      <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04); margin-left: 76px;"></div>
+      <div style="display: flex; gap: 28px; align-items: baseline;">
+        <span style="font-weight: 200; font-size: 48px; color: var(--text-muted); opacity: 0.4; min-width: 48px;">4</span>
+        <div>
+          <p style="font-weight: 400; font-size: 24px; color: var(--text-primary);">Ecosystem</p>
+          <p class="body-text" style="margin-top: 6px;">SaaS feeds the Fund. Fund success validates the SaaS. Each exit strengthens both sides of the flywheel.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="position: absolute; bottom: 80px; left: 120px; font-size: 20px; color: var(--accent);">
+      Replication cost: $500K&ndash;$2M + 18 months. APEX OS cost: $125.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 08 — GO-TO-MARKET                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-08">
+    <div style="padding-top: 32px;">
+      <p class="section-label">GO-TO-MARKET</p>
+      <h2 class="headline" style="margin-top: 20px;">12 months</h2>
+      <p class="body-text" style="margin-top: 12px;">From first builder to Series A readiness. Three phases, concrete milestones.</p>
+    </div>
+
+    <div style="position: relative; margin-top: 72px;">
+      <div style="position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--text-muted) 0%, var(--text-muted) 66%, var(--accent) 100%); opacity: 0.25;"></div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <div style="width: 30%; position: relative;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 2px solid var(--text-muted); opacity: 0.6; margin-bottom: 32px;"></div>
+          <p style="font-weight: 500; font-size: 14px; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 20px;">PHASE 1 &middot; M1&ndash;3</p>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary); margin-bottom: 4px;">Launch</p>
+          <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">100 builders onboarded</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">$10K MRR</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-muted);">Platform v1 live</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-muted);">Community foundations</p>
+          </div>
+        </div>
+        <div style="width: 30%; position: relative;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 2px solid var(--text-muted); opacity: 0.6; margin-bottom: 32px;"></div>
+          <p style="font-weight: 500; font-size: 14px; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 20px;">PHASE 2 &middot; M4&ndash;9</p>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary); margin-bottom: 4px;">Scale</p>
+          <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">300 active builders</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">$30K MRR</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-muted);">First Fund cohort (10 founders)</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-muted);">Data flywheel active</p>
+          </div>
+        </div>
+        <div style="width: 30%; position: relative;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); margin-bottom: 32px;"></div>
+          <p style="font-weight: 500; font-size: 14px; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 20px;">PHASE 3 &middot; M10&ndash;12</p>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary); margin-bottom: 4px;">Accelerate</p>
+          <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">500+ builders</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-primary);">$50K+ MRR</p>
+            <p class="body-text accent" style="font-size: 17px; font-weight: 500;">Series A ready</p>
+            <p class="body-text" style="font-size: 17px; color: var(--text-muted);">Fund generating returns</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position: absolute; bottom: 80px; left: 120px; right: 120px; display: flex; justify-content: space-between;">
+      <p class="caption" style="opacity: 0.4;">All milestones based on Base case assumptions (1.7% conversion of existing pipeline)</p>
+      <p class="caption" style="opacity: 0.4;">SaaS metrics only</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 09 — FOUNDER                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-09">
+    <div style="display: flex; align-items: center; height: 100%; gap: 80px;">
+      <div style="width: 36%; flex-shrink: 0;">
+        <div style="width: 100%; aspect-ratio: 3/4; background: #1A1A24; border-radius: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.04);">
+          <p style="font-size: 14px; color: var(--text-muted); letter-spacing: 0.06em; opacity: 0.4;">FOUNDER PHOTO</p>
+        </div>
+      </div>
+      <div style="flex: 1; padding-right: 40px;">
+        <p class="section-label">FOUNDER &amp; CEO</p>
+        <h2 class="headline" style="margin-top: 20px;">Nicolae Fratila</h2>
+        <p class="body-text" style="margin-top: 16px;">Solo founder. Technical architect. Ships first, pitches second.</p>
+
+        <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 28px;">
+          <div style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-weight: 300; font-size: 36px; color: var(--text-muted); opacity: 0.4; min-width: 56px; text-align: right;">10d</span>
+            <div>
+              <p style="font-size: 20px; color: var(--text-primary);">Built the entire APEX OS platform</p>
+              <p style="font-size: 15px; color: var(--text-muted); margin-top: 3px;">Full-stack: frontend, backend, AI integration, terminal UI, curriculum system</p>
+            </div>
+          </div>
+          <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04); margin-left: 76px;"></div>
+          <div style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-weight: 300; font-size: 36px; color: var(--text-muted); opacity: 0.4; min-width: 56px; text-align: right;">32K</span>
+            <div>
+              <p style="font-size: 20px; color: var(--text-primary);">Founded InfoAcademy</p>
+              <p style="font-size: 15px; color: var(--text-muted); margin-top: 3px;">32,000+ paying customers. 3 years of organic, profitable growth.</p>
+            </div>
+          </div>
+          <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04); margin-left: 76px;"></div>
+          <div style="display: flex; gap: 20px; align-items: baseline;">
+            <span style="font-weight: 300; font-size: 28px; color: var(--text-muted); opacity: 0.4; min-width: 56px; text-align: right; letter-spacing: -0.02em;">ship</span>
+            <div>
+              <p style="font-size: 20px; color: var(--text-primary);">Product-first mentality</p>
+              <p style="font-size: 15px; color: var(--text-muted); margin-top: 3px;">Technical founder who builds, not a CEO who manages. Code is the pitch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 10 — THE ASK                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-10">
+    <div style="display: flex; justify-content: space-between; height: 100%;">
+      <div style="padding-top: 32px; max-width: 55%; display: flex; flex-direction: column;">
+        <p class="section-label">THE ASK</p>
+        <p class="headline-xl" style="margin-top: 20px;">$200,000</p>
+        <p class="body-text" style="margin-top: 8px; font-size: 22px;">Pre-beta round. Enough to reach $1.5M ARR in 18 months.</p>
+        <p class="body-text" style="margin-top: 4px; font-size: 18px; color: var(--text-muted);">Instrument: SAFE &middot; Val Cap: $4M</p>
+
+        <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: baseline; gap: 16px;">
+            <p style="font-weight: 300; font-size: 32px; color: var(--text-primary); min-width: 100px;">$100K</p>
+            <div>
+              <p style="font-size: 18px; color: var(--text-secondary);">Platform <span style="color: var(--text-muted);">(50%)</span></p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">Engineering, infrastructure, AI integration</p>
+            </div>
+          </div>
+          <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04);"></div>
+          <div style="display: flex; align-items: baseline; gap: 16px;">
+            <p style="font-weight: 300; font-size: 32px; color: var(--text-primary); min-width: 100px;">$60K</p>
+            <div>
+              <p style="font-size: 18px; color: var(--text-secondary);">Community <span style="color: var(--text-muted);">(30%)</span></p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">Content, marketing, community building</p>
+            </div>
+          </div>
+          <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.04);"></div>
+          <div style="display: flex; align-items: baseline; gap: 16px;">
+            <p style="font-weight: 300; font-size: 32px; color: var(--text-primary); min-width: 100px;">$40K</p>
+            <div>
+              <p style="font-size: 18px; color: var(--text-secondary);">Operations <span style="color: var(--text-muted);">(20%)</span></p>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">Legal, admin, 6-month runway buffer</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex: 1;"></div>
+        <div style="padding-bottom: 8px;">
+          <p style="font-weight: 400; font-size: 16px; color: var(--text-muted); letter-spacing: 0.02em; margin-bottom: 16px;">Nicolae Fratila &middot; fratilanico@gmail.com &middot; infoacademy.uk</p>
+          <p style="font-weight: 400; font-size: 24px; color: var(--accent-cta);">Product works. 32,000 customers. Fund the growth.</p>
+        </div>
+      </div>
+
+      <div style="min-width: 380px; padding-top: 56px; display: flex; flex-direction: column; gap: 32px;">
+        <p style="font-weight: 500; font-size: 13px; color: var(--text-muted); letter-spacing: 0.12em;">WHAT $200K ENABLES</p>
+        <div>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary);">500+</p>
+          <p class="stat-label">paying builders on platform</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary);">$50K+</p>
+          <p class="stat-label">Monthly recurring revenue</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p style="font-weight: 300; font-size: 36px; color: var(--text-primary);">$1.5M</p>
+          <p class="stat-label">ARR at 18 months (base)</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p style="font-weight: 300; font-size: 36px; color: var(--accent);">Series A</p>
+          <p class="stat-label">Readiness in 12 months</p>
+        </div>
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.06);"></div>
+        <div>
+          <p style="font-weight: 300; font-size: 36px; color: var(--accent-cta);">Profitable</p>
+          <p class="stat-label">+$48K/mo at base case</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls">
+  <span class="nav-hint" id="nav-hint">Arrow keys or click to navigate</span>
+  <span class="slide-counter" id="slide-counter">1 / 10</span>
+</div>
+
+<script>
+  (function() {
+    var current = 0;
+    var slides = document.querySelectorAll('.slide');
+    var total = slides.length;
+    var counter = document.getElementById('slide-counter');
+    var hint = document.getElementById('nav-hint');
+
+    function show(n) {
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+      }
+      slides[n].classList.add('active');
+      counter.textContent = (n + 1) + ' / ' + total;
+    }
+
+    function next() {
+      if (current < total - 1) { current++; show(current); }
+      if (hint) { hint.classList.add('hidden'); }
+    }
+
+    function prev() {
+      if (current > 0) { current--; show(current); }
+      if (hint) { hint.classList.add('hidden'); }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+      if (e.key === 'Home') { e.preventDefault(); current = 0; show(0); }
+      if (e.key === 'End') { e.preventDefault(); current = total - 1; show(current); }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.controls')) return;
+      if (e.clientX > window.innerWidth * 0.3) next();
+      else prev();
+    });
+
+    function resize() {
+      var sx = window.innerWidth / 1920;
+      var sy = window.innerHeight / 1080;
+      var s = Math.min(sx, sy);
+      var ox = (window.innerWidth - 1920 * s) / 2;
+      var oy = (window.innerHeight - 1080 * s) / 2;
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].style.transform = 'translate(' + ox + 'px,' + oy + 'px) scale(' + s + ')';
+      }
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    show(0);
+
+    setTimeout(function() { if (hint) hint.classList.add('hidden'); }, 5000);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+- `ToolInvocationState` — Derived from `UIToolInvocation<any>["state"]`
+- `ToolPartRendererProps` — Props for custom tool renderers
+- `isToolLoading()`, `isToolError()`, `isToolComplete()` — State helpers
